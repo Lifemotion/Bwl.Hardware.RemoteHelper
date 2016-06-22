@@ -9,7 +9,7 @@
 #ifndef BWL_ADC_H_
 #define BWL_ADC_H_
 
-
+void adc_init_mux5 (unsigned char mux, unsigned char adjust, unsigned char refs, unsigned char prescaler);
 void adc_init (unsigned char mux, unsigned char adjust, unsigned char refs, unsigned char prescaler);
 void adc_off (void);
 unsigned int adc_read_once (void);

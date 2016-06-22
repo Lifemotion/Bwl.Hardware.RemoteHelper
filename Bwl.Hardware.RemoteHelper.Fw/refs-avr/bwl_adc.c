@@ -38,6 +38,7 @@ void adc_init (unsigned char mux, unsigned char adjust, unsigned char refs, unsi
 	ADCSRB = 0;
 	ADMUX  = (refs << REFS0)|(adjust << ADLAR)|(mux << MUX0);
 	adc_read_once();
+	adc_read_once();
 }
 
 int adc_read_average(int count )
