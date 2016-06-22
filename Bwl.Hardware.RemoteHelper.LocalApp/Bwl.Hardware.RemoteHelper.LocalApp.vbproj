@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>Sub Main</StartupObject>
     <RootNamespace>Bwl.Hardware.RemoteHelper</RootNamespace>
-    <AssemblyName>Bwl.Hardware.RemoteHelper.RemoteApp</AssemblyName>
+    <AssemblyName>Bwl.Hardware.RemoteHelper.LocalApp</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsFormsWithCustomSubMain</MyType>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -19,8 +19,8 @@
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>..\debug\RemoteHelper Remote App\bin\</OutputPath>
-    <DocumentationFile>Bwl.Hardware.RemoteHelper.RemoteApp.xml</DocumentationFile>
+    <OutputPath>..\debug\RemoteHelper Local App\bin\</OutputPath>
+    <DocumentationFile>Bwl.Hardware.RemoteHelper.LocalApp.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -29,8 +29,8 @@
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
-    <OutputPath>..\release\RemoteHelper Remote App\bin\</OutputPath>
-    <DocumentationFile>Bwl.Hardware.RemoteHelper.RemoteApp.xml</DocumentationFile>
+    <OutputPath>..\release\RemoteHelper Local App\bin\</OutputPath>
+    <DocumentationFile>Bwl.Hardware.RemoteHelper.LocalApp.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -46,7 +46,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>LK.icl.40.ico</ApplicationIcon>
+    <ApplicationIcon>LK.icl.42.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Bwl.Framework">
@@ -92,7 +92,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App.vb" />
+    <Compile Include="src\App.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -108,12 +108,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="RemoteHelperControlForm.Designer.vb">
-      <DependentUpon>RemoteHelperControlForm.vb</DependentUpon>
-    </Compile>
-    <Compile Include="RemoteHelperControlForm.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="src\RemoteHelperBoard.vb" />
+    <Compile Include="src\RemoteHelperUI.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -121,9 +117,6 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RemoteHelperControlForm.resx">
-      <DependentUpon>RemoteHelperControlForm.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -136,10 +129,9 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LK.icl.40.ico" />
+    <Content Include="LK.icl.42.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

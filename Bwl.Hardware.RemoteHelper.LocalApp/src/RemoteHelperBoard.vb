@@ -1,6 +1,6 @@
 ﻿Imports Bwl.Hardware.SimplSerial
 
-Class RemoteHelperBoard
+Public Class RemoteHelperBoard
     ReadOnly Property SS As New SimplSerialBus()
 
     Public Sub New()
@@ -8,8 +8,8 @@ Class RemoteHelperBoard
     End Sub
 
     Public Sub Connect(port As String)
-        _ss.Disconnect()
-        _ss.SerialDevice.DeviceAddress = port
+        _SS.Disconnect()
+        _SS.SerialDevice.DeviceAddress = port
         _SS.SerialDevice.DeviceSpeed = 250000
         _SS.Connect()
     End Sub
@@ -20,7 +20,7 @@ Class RemoteHelperBoard
         data(1) = horizontalStop
         data(2) = vertical / 10 + 127
         data(3) = verticalStop
-        _ss.Send(New SSRequest(0, 5, data))
+        _SS.Send(New SSRequest(0, 5, data))
     End Sub
 
     Public Property AdcRegularMultiplier As Single = (68 + 7.5) / 7.5 / 1024 * 2.56

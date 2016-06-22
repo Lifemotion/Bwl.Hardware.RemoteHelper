@@ -1,17 +1,16 @@
-﻿Imports Bwl.Framework
-Imports Bwl.Network.ClientServer
+﻿Imports Bwl.Network.ClientServer
+Imports Bwl.Framework
 
 Module TestApp
     Private _app As New AppBase
-    'TODO: перенести автоконнект во фреймворк
+    Private _board As New RemoteHelperBoard
+    Private _ui As New RemoteHelperAutoUI(_app, _board)
+
     Private _addressSetting As New StringSetting(_app.RootStorage, "ServerAddress", "dev.cleverflow.ru")
     Private _portSetting As New IntegerSetting(_app.RootStorage, "ServerPort", 3180)
-    Private _userSetting As New StringSetting(_app.RootStorage, "ServerUser", "RemoteHelper-Remote")
+    Private _userSetting As New StringSetting(_app.RootStorage, "ServerUser", "RemoteHelper-Local1")
     Private _passwordSetting As New StringSetting(_app.RootStorage, "ServerPassword", "")
-
-    Private _targetSetting As New StringSetting(_app.RootStorage, "TargetID", "RemoteHelper-Local1")
-    Private _transport As New NetClient
-    Private _form As New RemoteHelperControlForm(_app, _transport, _userSetting.Value, _targetSetting.Value)
+    Private WithEvents _transport As New NetClient
 
     Public Sub Main()
         Dim connectThread As New Threading.Thread(Sub()
@@ -30,8 +29,27 @@ Module TestApp
                                                   End Sub)
         connectThread.IsBackground = True
         connectThread.Start()
-        Application.EnableVisualStyles()
-        Application.Run(_form)
+
+        _ui.RunApp()
     End Sub
 
+    Private Sub _transport_ReceivedMessage(message As NetMessage) Handles _transport.ReceivedMessage
+        Select Case message.Part(0).ToLower
+            Case "checkboard"
+                Dim msg As New NetMessage("S", "checkboard-result")
+                msg.ToID = message.FromID
+                msg.FromID = message.ToID
+                _transport.SendMessage(msg)
+            Case "pointermove"
+                Try
+                    _board.PointerMove(message.PartDouble(1), message.PartDouble(2), message.PartDouble(3), message.PartDouble(4))
+                    _app.RootLogger.AddDebug(message.ToString)
+                Catch ex As Exception
+                    Dim msg As New NetMessage("S", "board-error", ex.Message)
+                    msg.ToID = message.FromID
+                    msg.FromID = message.ToID
+                    _transport.SendMessage(msg)
+                End Try
+        End Select
+    End Sub
 End Module

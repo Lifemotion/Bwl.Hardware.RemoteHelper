@@ -165,7 +165,7 @@ Bwl.Framework
  </summary>
  <remarks></remarks>
 </member>
-<member name="E:Bwl.Framework.NetClientSimple.Disonnected">
+<member name="E:Bwl.Framework.NetClientSimple.Disconnected">
  <summary>
  Отключились от сервера.
  </summary>

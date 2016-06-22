@@ -50,7 +50,7 @@ bwl.Network.ClientServer
  </summary>
  <remarks></remarks>
 </member>
-<member name="M:bwl.Network.ClientServer.NetClient.IsConnected">
+<member name="P:bwl.Network.ClientServer.NetClient.IsConnected">
  <summary>
  Подключены ли мы сейчас к серверу.
  </summary>
@@ -70,7 +70,7 @@ bwl.Network.ClientServer
  </summary>
  <remarks></remarks>
 </member>
-<member name="E:bwl.Network.ClientServer.NetClient.Disonnected">
+<member name="E:bwl.Network.ClientServer.NetClient.Disconnected">
  <summary>
  Отключились от сервера.
  </summary>
@@ -126,11 +126,6 @@ bwl.Network.ClientServer
  </remarks>
  
 </member>
-<member name="T:bwl.Network.ClientServer.IConnectedClient">
- <summary>
- Класс, представляющий интерфейс подключившегося клиента.
- </summary>
-</member>
 <member name="T:bwl.Network.ClientServer.ConnectedClient">
  <summary>
  Класс, представляющий подключившегося клиента.
@@ -178,7 +173,7 @@ bwl.Network.ClientServer
  <param name="broken"></param>
  <remarks></remarks>
 </member>
-<member name="M:bwl.Network.ClientServer.NetServer.SendMessage(bwl.Network.ClientServer.IConnectedClient,bwl.Network.ClientServer.NetMessage)">
+<member name="M:bwl.Network.ClientServer.NetServer.SendMessage(bwl.Network.ClientServer.ConnectedClient,bwl.Network.ClientServer.NetMessage)">
  <summary>
  Отправить сообщение клиенту, если известен объект указывающий клиента.
  </summary>
@@ -193,6 +188,20 @@ bwl.Network.ClientServer
  <param name="clientID">Идентификатор ID объекта ConnectedClient</param>
  <param name="message"></param>
  <remarks></remarks>
+</member>
+<member name="M:bwl.Network.ClientServer.NetServer.SendMessage(bwl.Network.ClientServer.NetMessage)">
+ <summary>
+ Отправить сообщение, используя внутреннее поле ToID
+ </summary>
+ <param name="message"></param>
+</member>
+<member name="M:bwl.Network.ClientServer.NetServer.RegisterMe(System.String,System.String,System.String)">
+ <summary>
+ Для сервера это не имеет смысла.
+ </summary>
+ <param name="id"></param>
+ <param name="password"></param>
+ <param name="options"></param>
 </member>
 <member name="T:bwl.Network.ClientServer.My.Resources.Resources">
 <summary>
