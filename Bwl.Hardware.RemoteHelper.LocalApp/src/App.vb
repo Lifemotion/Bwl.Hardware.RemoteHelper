@@ -3,7 +3,7 @@ Imports Bwl.Framework
 
 Module TestApp
     Private _app As New AppBase
-    Private _board As New RemoteHelperBoard
+    Private _board As New RemoteHelperBoard(_app)
     Private _ui As New RemoteHelperAutoUI(_app, _board)
 
     Private _addressSetting As New StringSetting(_app.RootStorage, "ServerAddress", "dev.cleverflow.ru")

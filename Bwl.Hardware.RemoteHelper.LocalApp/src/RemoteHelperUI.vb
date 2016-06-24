@@ -31,6 +31,7 @@ Public Class RemoteHelperAutoUI
     End Sub
 
     Public Sub RunApp()
+        _connectButton_Click(Nothing)
         Application.EnableVisualStyles()
         Application.Run(AutoUIForm.Create(_app))
     End Sub
@@ -42,7 +43,11 @@ Public Class RemoteHelperAutoUI
     End Sub
 
     Private Sub _connectButton_Click(source As AutoButton) Handles _connectButton.Click
-        _board.Connect(IO.Ports.SerialPort.GetPortNames(0))
+        Try
+            _board.Connect()
+        Catch ex As Exception
+            _app.RootLogger.AddWarning(ex.Message)
+        End Try
     End Sub
 
     Private Sub _rightButton_Click(source As AutoButton) Handles _rightButton.Click

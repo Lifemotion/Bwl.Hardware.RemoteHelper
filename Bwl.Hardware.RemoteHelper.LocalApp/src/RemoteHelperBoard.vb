@@ -1,15 +1,17 @@
-﻿Imports Bwl.Hardware.SimplSerial
+﻿Imports Bwl.Framework
+Imports Bwl.Hardware.SimplSerial
 
 Public Class RemoteHelperBoard
     ReadOnly Property SS As New SimplSerialBus()
+    Private _serialPortSetting As StringSetting
 
-    Public Sub New()
-
+    Public Sub New(app As AppBase)
+        _serialPortSetting = app.RootStorage.CreateStringSetting("BoardSerialPort", "COM0")
     End Sub
 
-    Public Sub Connect(port As String)
+    Public Sub Connect()
         _SS.Disconnect()
-        _SS.SerialDevice.DeviceAddress = port
+        _SS.SerialDevice.DeviceAddress = _serialPortSetting.Value
         _SS.SerialDevice.DeviceSpeed = 250000
         _SS.Connect()
     End Sub
